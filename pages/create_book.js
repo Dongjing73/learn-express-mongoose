@@ -14,12 +14,12 @@ exports.new_book = async (res, family_name, first_name, genre_name, title) => {
   let author = await getAuthor(family_name, first_name).exec();
   let genre = await getGenre(genre_name).exec();
   let book = Book({
-    title: title,
-    summary: 'Demo Summary to be updated later',
-    author: author,
-    isbn: 'ISBN2022',
-    genre: genre
-  });
+                    title: title,
+                    summary: 'Demo Summary to be updated later',
+                    author: author,
+                    isbn: 'ISBN2022',
+                    genre: genre
+                  });
   await book.save();
   res.send('Created new book : ' + book);
 }

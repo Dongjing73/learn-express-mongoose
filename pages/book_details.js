@@ -10,23 +10,23 @@ function get_book(id) {
 }
 
 function get_book_dtl(id) {
-  return BookInstance
-          .find({ 'book': id })
-          .select('imprint status');
+    return BookInstance
+        .find({ 'book': id })
+        .select('imprint status');
 }
 
 exports.show_book_dtls = async (res, id) => {
-  const results = await Promise.all([get_book(id).exec(), get_book_dtl(id).exec()])
-  try {
-    let book = await results[0];
-    let copies = await results[1];
-    res.send({
-      title: book.title,
-      author: book.author.name,
-      copies: copies,
-    });
-  }
-  catch(err) {
-    res.send(`Book ${id} not found`);
-  } 
+    const results = await Promise.all([get_book(id).exec(), get_book_dtl(id).exec()])
+    try {
+        let book = await results[0];
+        let copies = await results[1];
+        res.send({
+                     title: book.title,
+                     author: book.author.name,
+                     copies: copies,
+                 });
+    }
+    catch(err) {
+        res.send(`Book ${id} not found`);
+    }
 }
